@@ -1,0 +1,10 @@
+{
+  "frontend/src/App.tsx": "Main app component with TanStack Router, all routes, AppLayout with Navigation/Footer, and a proper `IndexRedirect` component (capitalized, uses hooks correctly) to handle auth-based redirects.",
+  "frontend/src/pages/AdminPanelPage.tsx": "Admin-only panel with access control, tabbed pending/all submissions view, approve/reject buttons — `flex-shrink-0` replaced with `shrink-0`.",
+  "frontend/src/pages/DailyTasksPage.tsx": "Daily tasks page with 5 task types, submission status tracking, proof inputs, and admin disclaimer — `flex-shrink-0` replaced with `shrink-0`.",
+  "frontend/src/pages/DisclaimerPage.tsx": "Static Disclaimer page with 3 key points about earnings and voluntary participation — `flex-shrink-0` replaced with `shrink-0`.",
+  "frontend/src/pages/ReferralPage.tsx": "Referral and team page with stats, income summary, referral link sharing, and 10-level bonus table — `flex-shrink-0` replaced with `shrink-0`.",
+  "frontend/src/pages/RulesPage.tsx": "Static Important Rules page with 6 platform rules in card layout — `flex-shrink-0` replaced with `shrink-0`.",
+  "frontend/src/pages/TermsPage.tsx": "Static Terms & Conditions page with 5 platform rules and last-updated date — `flex-shrink-0` replaced with `shrink-0`.",
+  "frontend/src/pages/WalletPage.tsx": "Wallet page with balance cards, UPI withdrawal form with ₹500 minimum validation, and withdrawal history — `flex-shrink-0` replaced with `shrink-0`."
+}

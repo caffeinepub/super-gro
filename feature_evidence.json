@@ -1,0 +1,179 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-build-the-login-registration-page-with-a-mobile-number-input-field-otp-request-button-otp-entry-field-shown-after-otp-is-sent-optional-referral-code-input-a-continue-button-and-a-terms-conditions-agreement-notice-after-successful-otp-verification-navigate-to-the-home-page-use-simulated-otp-any-6-digit-code-accepted-since-sms-is-not-supported",
+      "featureTitle": "Build the Login / Registration page with: a mobile number input field, OTP request button, OTP entry field (shown after OTP is sent), optional referral code input, a 'Continue' button, and a Terms & Conditions agreement notice. After successful OTP verification, navigate to the Home page. Use simulated OTP (any 6-digit code accepted) since SMS is not supported.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/LoginPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-home-dashboard-page-showing-a-welcome-message-welcome-to-daily-task-earn-pro-wallet-balance-card-amount-direct-income-stat-team-income-stat-and-quick-action-buttons-daily-tasks-withdraw-copy-referral-link-share-on-whatsapp-opens-wa-me-link-share-on-telegram-opens-t-me-link-the-copy-referral-link-button-copies-the-user-s-unique-referral-url-to-clipboard",
+      "featureTitle": "Build the Home dashboard page showing: a welcome message ('Welcome to Daily Task Earn Pro'), Wallet Balance card (₹ amount), Direct Income stat, Team Income stat, and quick-action buttons: Daily Tasks, Withdraw, Copy Referral Link, Share on WhatsApp (opens wa.me link), Share on Telegram (opens t.me link). The Copy Referral Link button copies the user's unique referral URL to clipboard.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-daily-tasks-page-listing-all-five-task-types-with-their-reward-amounts-daily-check-in-50-watch-video-100-submit-screenshot-50-refer-1-friend-1000-weekly-bonus-1000-each-task-card-shows-the-task-name-reward-and-current-status-available-pending-approved-rejected-check-in-is-a-one-tap-action-watch-video-shows-a-placeholder-video-link-screenshot-task-has-a-file-url-input-for-proof-submission-a-notice-reads-task-approval-is-required-before-earnings-are-added-to-your-wallet",
+      "featureTitle": "Build the Daily Tasks page listing all five task types with their reward amounts: Daily Check-In (₹50), Watch Video (₹100), Submit Screenshot (₹50), Refer 1 Friend (₹1000), Weekly Bonus (₹1000). Each task card shows the task name, reward, and current status (available/pending/approved/rejected). Check-In is a one-tap action. Watch Video shows a placeholder video link. Screenshot task has a file/URL input for proof submission. A notice reads: 'Task approval is required before earnings are added to your wallet.'",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/DailyTasksPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-referral-team-page-showing-direct-referral-count-team-size-current-level-reached-a-level-progress-table-listing-all-10-levels-with-required-members-bonus-amount-and-claimed-unclaimed-status-and-a-claim-button-for-eligible-unclaimed-levels-display-a-note-referral-income-is-credited-only-after-the-referred-user-completes-at-least-one-daily-task",
+      "featureTitle": "Build the Referral / Team page showing: direct referral count, team size, current level reached, a level progress table listing all 10 levels with required members, bonus amount, and claimed/unclaimed status, and a 'Claim' button for eligible unclaimed levels. Display a note: 'Referral income is credited only after the referred user completes at least one daily task.'",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/ReferralPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-wallet-page-showing-available-balance-total-earnings-and-total-withdrawn-cards-include-a-withdrawal-form-with-upi-id-input-and-amount-input-show-validation-minimum-500-on-submit-call-submitwithdrawal-and-show-a-confirmation-message-withdrawal-request-submitted-processing-time-12-48-hours-after-verification-show-a-list-of-past-withdrawal-requests-with-their-status",
+      "featureTitle": "Build the Wallet page showing: Available Balance, Total Earnings, and Total Withdrawn cards. Include a withdrawal form with UPI ID input and amount input. Show validation: minimum ₹500. On submit, call submitWithdrawal and show a confirmation message: 'Withdrawal request submitted. Processing time: 12–48 hours after verification.' Show a list of past withdrawal requests with their status.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/WalletPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-an-admin-panel-page-accessible-only-to-admin-users-with-two-tabs-task-approvals-and-withdrawal-approvals-task-approvals-tab-lists-pending-task-submissions-with-user-mobile-task-type-proof-url-and-approve-reject-buttons-withdrawal-approvals-tab-lists-pending-withdrawal-requests-with-user-mobile-upi-id-amount-and-approve-reject-buttons-also-include-a-users-tab-with-a-list-of-all-users-and-a-block-button-per-user",
+      "featureTitle": "Build an Admin Panel page (accessible only to admin users) with two tabs: Task Approvals and Withdrawal Approvals. Task Approvals tab lists pending task submissions with user mobile, task type, proof URL, and Approve/Reject buttons. Withdrawal Approvals tab lists pending withdrawal requests with user mobile, UPI ID, amount, and Approve/Reject buttons. Also include a Users tab with a list of all users and a Block button per user.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/AdminPanelPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-static-information-pages-1-terms-conditions-page-with-the-5-stated-rules-2-disclaimer-page-with-the-3-stated-points-3-important-rules-page-with-the-6-stated-rules-4-support-page-showing-support-email-s10361781-gmail-com-mailto-link-telegram-support-https-t-me-supergroearn-external-link-whatsapp-support-91-63710-78941-wa-me-link",
+      "featureTitle": "Build static information pages: (1) Terms & Conditions page with the 5 stated rules, (2) Disclaimer page with the 3 stated points, (3) Important Rules page with the 6 stated rules, (4) Support page showing: Support Email: s10361781@gmail.com (mailto link), Telegram Support: https://t.me/supergroearn (external link), WhatsApp Support: +91-63710-78941 (wa.me link).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/pages/DisclaimerPage.tsx",
+        "frontend/src/pages/RulesPage.tsx",
+        "frontend/src/pages/SupportPage.tsx",
+        "frontend/src/pages/TermsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-cohesive-visual-theme-throughout-the-app-a-deep-emerald-green-and-gold-color-palette-evoking-prosperity-and-trust-with-clean-card-based-layouts-optimized-for-mobile-first-usage-bold-rupee-amounts-in-gold-subtle-gradient-backgrounds-and-a-professional-sans-serif-typeface-use-consistent-iconography-for-tasks-wallet-and-referral-sections",
+      "featureTitle": "Apply a cohesive visual theme throughout the app: a deep emerald green and gold color palette evoking prosperity and trust, with clean card-based layouts optimized for mobile-first usage, bold rupee amounts in gold, subtle gradient backgrounds, and a professional sans-serif typeface. Use consistent iconography for tasks, wallet, and referral sections.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Navigation.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

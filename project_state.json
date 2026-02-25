@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Super Gro (Daily Task Earn Pro) is a task-based earning mobile app where users complete daily tasks to earn rewards in INR. Features include OTP-based login with optional referral code, home dashboard with wallet balance, daily tasks (check-in, video watch, screenshot submission), a 10-level referral/team bonus system (5 members per level), UPI-based withdrawals (min ₹500, 12–48hr processing), admin approval for task rewards, and support via email/Telegram/WhatsApp.",
+  "architectural_notes": [
+    "Admin approval required before task earnings are credited to user wallet",
+    "Referral income credited only after referred user completes at least one daily task",
+    "Withdrawal requires minimum ₹500 balance and manual admin verification (12–48hr processing)",
+    "Referral system is 10 levels deep with 5 members per level threshold for level bonuses"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- App logo: stylized letter 'S' intertwined with a sprouting plant on a deep green background, gold accents (super-gro-logo.dim_256x256.png)\n- Home page hero banner: lush green growth field with golden coins floating upward, vibrant and motivational (hero-banner.dim_1200x400.png)",
+  "existing_features": [
+    {
+      "id": "feature-build-the-login-registration-page-with-a-mobile-number-input-field-otp-request-button-otp-entry-field-shown-after-otp-is-sent-optional-referral-code-input-a-continue-button-and-a-terms-conditions-agreement-notice-after-successful-otp-verification-navigate-to-the-home-page-use-simulated-otp-any-6-digit-code-accepted-since-sms-is-not-supported",
+      "title": "Build the Login / Registration page with: a mobile number input field, OTP request button, OTP entry field (shown after OTP is sent), optional referral code input, a 'Continue' button, and a Terms & Conditions agreement notice. After successful OTP verification, navigate to the Home page. Use simulated OTP (any 6-digit code accepted) since SMS is not supported.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-home-dashboard-page-showing-a-welcome-message-welcome-to-daily-task-earn-pro-wallet-balance-card-amount-direct-income-stat-team-income-stat-and-quick-action-buttons-daily-tasks-withdraw-copy-referral-link-share-on-whatsapp-opens-wa-me-link-share-on-telegram-opens-t-me-link-the-copy-referral-link-button-copies-the-user-s-unique-referral-url-to-clipboard",
+      "title": "Build the Home dashboard page showing: a welcome message ('Welcome to Daily Task Earn Pro'), Wallet Balance card (₹ amount), Direct Income stat, Team Income stat, and quick-action buttons: Daily Tasks, Withdraw, Copy Referral Link, Share on WhatsApp (opens wa.me link), Share on Telegram (opens t.me link). The Copy Referral Link button copies the user's unique referral URL to clipboard.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-daily-tasks-page-listing-all-five-task-types-with-their-reward-amounts-daily-check-in-50-watch-video-100-submit-screenshot-50-refer-1-friend-1000-weekly-bonus-1000-each-task-card-shows-the-task-name-reward-and-current-status-available-pending-approved-rejected-check-in-is-a-one-tap-action-watch-video-shows-a-placeholder-video-link-screenshot-task-has-a-file-url-input-for-proof-submission-a-notice-reads-task-approval-is-required-before-earnings-are-added-to-your-wallet",
+      "title": "Build the Daily Tasks page listing all five task types with their reward amounts: Daily Check-In (₹50), Watch Video (₹100), Submit Screenshot (₹50), Refer 1 Friend (₹1000), Weekly Bonus (₹1000). Each task card shows the task name, reward, and current status (available/pending/approved/rejected). Check-In is a one-tap action. Watch Video shows a placeholder video link. Screenshot task has a file/URL input for proof submission. A notice reads: 'Task approval is required before earnings are added to your wallet.'",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-referral-team-page-showing-direct-referral-count-team-size-current-level-reached-a-level-progress-table-listing-all-10-levels-with-required-members-bonus-amount-and-claimed-unclaimed-status-and-a-claim-button-for-eligible-unclaimed-levels-display-a-note-referral-income-is-credited-only-after-the-referred-user-completes-at-least-one-daily-task",
+      "title": "Build the Referral / Team page showing: direct referral count, team size, current level reached, a level progress table listing all 10 levels with required members, bonus amount, and claimed/unclaimed status, and a 'Claim' button for eligible unclaimed levels. Display a note: 'Referral income is credited only after the referred user completes at least one daily task.'",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-wallet-page-showing-available-balance-total-earnings-and-total-withdrawn-cards-include-a-withdrawal-form-with-upi-id-input-and-amount-input-show-validation-minimum-500-on-submit-call-submitwithdrawal-and-show-a-confirmation-message-withdrawal-request-submitted-processing-time-12-48-hours-after-verification-show-a-list-of-past-withdrawal-requests-with-their-status",
+      "title": "Build the Wallet page showing: Available Balance, Total Earnings, and Total Withdrawn cards. Include a withdrawal form with UPI ID input and amount input. Show validation: minimum ₹500. On submit, call submitWithdrawal and show a confirmation message: 'Withdrawal request submitted. Processing time: 12–48 hours after verification.' Show a list of past withdrawal requests with their status.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-admin-panel-page-accessible-only-to-admin-users-with-two-tabs-task-approvals-and-withdrawal-approvals-task-approvals-tab-lists-pending-task-submissions-with-user-mobile-task-type-proof-url-and-approve-reject-buttons-withdrawal-approvals-tab-lists-pending-withdrawal-requests-with-user-mobile-upi-id-amount-and-approve-reject-buttons-also-include-a-users-tab-with-a-list-of-all-users-and-a-block-button-per-user",
+      "title": "Build an Admin Panel page (accessible only to admin users) with two tabs: Task Approvals and Withdrawal Approvals. Task Approvals tab lists pending task submissions with user mobile, task type, proof URL, and Approve/Reject buttons. Withdrawal Approvals tab lists pending withdrawal requests with user mobile, UPI ID, amount, and Approve/Reject buttons. Also include a Users tab with a list of all users and a Block button per user.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-static-information-pages-1-terms-conditions-page-with-the-5-stated-rules-2-disclaimer-page-with-the-3-stated-points-3-important-rules-page-with-the-6-stated-rules-4-support-page-showing-support-email-s10361781-gmail-com-mailto-link-telegram-support-https-t-me-supergroearn-external-link-whatsapp-support-91-63710-78941-wa-me-link",
+      "title": "Build static information pages: (1) Terms & Conditions page with the 5 stated rules, (2) Disclaimer page with the 3 stated points, (3) Important Rules page with the 6 stated rules, (4) Support page showing: Support Email: s10361781@gmail.com (mailto link), Telegram Support: https://t.me/supergroearn (external link), WhatsApp Support: +91-63710-78941 (wa.me link).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-visual-theme-throughout-the-app-a-deep-emerald-green-and-gold-color-palette-evoking-prosperity-and-trust-with-clean-card-based-layouts-optimized-for-mobile-first-usage-bold-rupee-amounts-in-gold-subtle-gradient-backgrounds-and-a-professional-sans-serif-typeface-use-consistent-iconography-for-tasks-wallet-and-referral-sections",
+      "title": "Apply a cohesive visual theme throughout the app: a deep emerald green and gold color palette evoking prosperity and trust, with clean card-based layouts optimized for mobile-first usage, bold rupee amounts in gold, subtle gradient backgrounds, and a professional sans-serif typeface. Use consistent iconography for tasks, wallet, and referral sections.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "OTP-based login with mobile number and optional referral code entry",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Home dashboard with wallet balance, income stats, task shortcuts, referral sharing (WhatsApp/Telegram)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Daily task section: check-in (₹50), watch video (₹100), screenshot submission (₹50), refer friend (₹1000), weekly bonus (₹1000) — all requiring admin approval",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "10-level referral/team bonus system with 5 members per level and tiered bonuses from ₹1000 to ₹500000",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Wallet section showing available balance, total earnings, total withdrawn with UPI-based withdrawal (min ₹500, 12–48hr processing)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Terms & Conditions, Disclaimer, and Important Rules pages",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Support section with email, Telegram, and WhatsApp contact links",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Implement user registration and login backend: store user records with mobile number, hashed OTP, referral code, referrer ID, registration timestamp, and account status (active/blocked). Support OTP generation and verification. On registration, accept an optional referral code and link the new user to the referrer. Expose functions: requestOTP(mobile), verifyOTP(mobile, otp) -> session token, registerUser(mobile, otp, referralCode?), getMyProfile() -> user record.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Implement the daily tasks backend: define task types (CHECKIN=₹50, WATCH_VIDEO=₹100, SCREENSHOT=₹50, REFER_FRIEND=₹1000, WEEKLY_BONUS=₹1000). Store task submission records per user per day with status (pending/approved/rejected). Expose functions: submitTask(taskType, proofUrl?) -> submissionId, getMyTaskSubmissions() -> list, adminApproveTask(submissionId) -> credits wallet, adminRejectTask(submissionId). Credits are only added to wallet after admin approval. Enforce one submission per task type per day (except REFER_FRIEND). Track 7-consecutive-day streak for WEEKLY_BONUS eligibility.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Implement the 10-level referral and team bonus backend. Each level requires 5 direct or indirect members. Level bonuses: L1=₹1000, L2=₹5000, L3=₹10000, L4=₹25000, L5=₹50000, L6=₹100000, L7=₹150000, L8=₹170000, L9=₹200000, L10=₹500000. Direct referral bonus is ₹1000. Referral income is credited only after the referred user completes at least one daily task. Store each user's referral tree depth and direct referral count. Expose functions: getMyReferralStats() -> { directCount, teamSize, levelReached, directIncome, teamIncome }, claimLevelBonus(level) -> credits wallet if eligible.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Implement the wallet and withdrawal backend. Track per-user: availableBalance, totalEarnings, totalWithdrawn. Minimum withdrawal amount is ₹500. Store withdrawal requests with fields: upiId, amount, status (pending/approved/rejected), requestedAt. Expose functions: getWallet() -> { availableBalance, totalEarnings, totalWithdrawn }, submitWithdrawal(upiId, amount) -> requestId, adminApproveWithdrawal(requestId), adminRejectWithdrawal(requestId). Deduct from availableBalance only on admin approval.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Implement an admin panel backend with a protected admin role. Expose admin-only functions: listPendingTaskSubmissions(), approveTask(submissionId), rejectTask(submissionId), listPendingWithdrawals(), approveWithdrawal(requestId), rejectWithdrawal(requestId), blockUser(userId), listAllUsers(). Admin identity is hardcoded as the canister deployer principal.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Super Gro",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

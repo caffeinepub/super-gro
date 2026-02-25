@@ -1,0 +1,295 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Super Gro – Daily Task Earn Pro Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-6",
+      "summary": "Build Login/Registration page with mobile number, OTP verification, and optional referral code",
+      "acceptanceCriteria": [
+        "User can enter mobile number and request OTP",
+        "OTP field appears after requesting OTP",
+        "Referral code field is optional and clearly labeled",
+        "Successful OTP verification navigates to Home page",
+        "Terms & Conditions link is visible and tappable"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/LoginPage.tsx",
+          "operation": "create",
+          "description": "Create login/registration page with mobile number input, OTP request and verification fields, optional referral code input, and Terms & Conditions agreement notice. Use the authorization component to handle authentication after OTP verification. After successful verification, check for existing user profile using getCallerUserProfile() and either navigate to profile setup or Home page. Implement simulated OTP that accepts any 6-digit code."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for LoginPage at /login and set it as the landing page for unauthenticated users. Ensure authenticated users are redirected away from login page to Home."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build Home dashboard with wallet balance, income stats, and quick-action buttons",
+      "acceptanceCriteria": [
+        "Wallet Balance displays live data from getWallet()",
+        "Direct Income and Team Income display values from getMyReferralStats()",
+        "Copy Referral Link copies the link and shows a success toast",
+        "Share on WhatsApp opens https://wa.me/?text=<referral link>",
+        "Share on Telegram opens https://t.me/share/url?url=<referral link>"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Create Home dashboard page showing welcome message, wallet balance card (fetched from backend), Direct Income and Team Income stats (fetched from backend), and quick-action buttons: Daily Tasks (navigate to /tasks), Withdraw (navigate to /wallet), Copy Referral Link (copy unique referral URL to clipboard with toast notification), Share on WhatsApp (open wa.me link with referral), and Share on Telegram (open t.me link with referral). Use deep emerald green and gold color scheme with card-based layout. Display the generated hero banner image from frontend/public/assets/generated/hero-banner.dim_1200x400.png as a background or header visual."
+        },
+        {
+          "path": "frontend/src/hooks/useWallet.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch wallet data (availableBalance, totalEarnings, totalWithdrawn) from backend. Cache with queryKey ['wallet']."
+        },
+        {
+          "path": "frontend/src/hooks/useReferralStats.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch referral statistics (directCount, teamSize, levelReached, directIncome, teamIncome) from backend. Cache with queryKey ['referralStats']."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for HomePage at /home and set it as the default authenticated landing page."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Build Daily Tasks page with all five task types, rewards, and submission status",
+      "acceptanceCriteria": [
+        "Each task card shows the reward amount and current submission status",
+        "Already-submitted tasks show 'Pending Approval' and disable resubmission",
+        "Screenshot task has a text input for proof URL",
+        "Approved tasks show 'Approved' badge in green",
+        "Disclaimer notice is visible at the bottom of the page"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DailyTasksPage.tsx",
+          "operation": "create",
+          "description": "Create Daily Tasks page listing five task types with reward amounts: Daily Check-In (₹50, one-tap action), Watch Video (₹100, with placeholder video link), Submit Screenshot (₹50, file/URL input for proof), Refer 1 Friend (₹1000), Weekly Bonus (₹1000, gated by 7-day streak). Each task card displays task name, reward in gold text, and current status badge (available/pending/approved/rejected). Fetch submission status from backend and disable resubmission for pending/approved tasks. Include disclaimer notice at bottom: 'Task approval is required before earnings are added to your wallet.' Use card-based layout with emerald green theme."
+        },
+        {
+          "path": "frontend/src/hooks/useTaskSubmissions.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch user's task submissions from backend, returning list with submission status per task type. Cache with queryKey ['taskSubmissions']."
+        },
+        {
+          "path": "frontend/src/hooks/useSubmitTask.ts",
+          "operation": "create",
+          "description": "Create mutation hook for submitting tasks to backend, accepting taskType and optional proofUrl. Invalidate ['taskSubmissions'] and ['wallet'] queries on success."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for DailyTasksPage at /tasks."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Build Referral/Team page with level progress table and claim functionality",
+      "acceptanceCriteria": [
+        "Level table shows all 10 levels with correct bonus amounts",
+        "Eligible unclaimed levels show an active Claim button",
+        "Already claimed levels show a 'Claimed' badge",
+        "Ineligible levels show the required member count remaining"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ReferralPage.tsx",
+          "operation": "create",
+          "description": "Create Referral/Team page displaying direct referral count, team size, and current level reached (fetched from backend). Show level progress table with all 10 levels, each requiring 5 members, with bonus amounts (L1=₹1000, L2=₹5000, L3=₹10000, L4=₹25000, L5=₹50000, L6=₹100000, L7=₹150000, L8=₹170000, L9=₹200000, L10=₹500000). Display claimed/unclaimed status with Claim button for eligible levels. Include note: 'Referral income is credited only after the referred user completes at least one daily task.' Use gold highlights for bonus amounts and emerald green for claimed badges."
+        },
+        {
+          "path": "frontend/src/hooks/useClaimLevelBonus.ts",
+          "operation": "create",
+          "description": "Create mutation hook for claiming level bonus from backend, accepting level number. Invalidate ['referralStats'] and ['wallet'] queries on success."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for ReferralPage at /referral."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Build Wallet page with balance cards, withdrawal form, and transaction history",
+      "acceptanceCriteria": [
+        "Wallet cards display live balance data",
+        "Form rejects amounts below ₹500 with an inline error",
+        "Successful submission shows the processing time notice",
+        "Past withdrawal requests list shows amount, UPI ID, status, and date"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/WalletPage.tsx",
+          "operation": "create",
+          "description": "Create Wallet page displaying three cards: Available Balance, Total Earnings, and Total Withdrawn (fetched from backend). Include withdrawal form with UPI ID input and amount input, validating minimum ₹500. On successful submission, show confirmation: 'Withdrawal request submitted. Processing time: 12–48 hours after verification.' Display list of past withdrawal requests with amount, UPI ID, status badge (pending/approved/rejected), and date. Use gold for balance amounts and emerald green for card backgrounds."
+        },
+        {
+          "path": "frontend/src/hooks/useWithdrawalRequests.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch user's withdrawal request history from backend. Cache with queryKey ['withdrawalRequests']."
+        },
+        {
+          "path": "frontend/src/hooks/useSubmitWithdrawal.ts",
+          "operation": "create",
+          "description": "Create mutation hook for submitting withdrawal request to backend, accepting upiId and amount. Validate minimum ₹500 on frontend. Invalidate ['withdrawalRequests'] and ['wallet'] queries on success."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for WalletPage at /wallet."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Build Admin Panel with task approvals, withdrawal approvals, and user management tabs",
+      "acceptanceCriteria": [
+        "Admin panel is hidden/inaccessible to non-admin users",
+        "Approving a task submission updates its status in the list",
+        "Approving a withdrawal updates its status and the user's wallet",
+        "Blocking a user updates their account status in the users list"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AdminPanelPage.tsx",
+          "operation": "create",
+          "description": "Create Admin Panel page accessible only to admin users (check using isCallerAdmin() from backend). Include three tabs: (1) Task Approvals tab listing pending task submissions with user mobile, task type, proof URL, and Approve/Reject buttons; (2) Withdrawal Approvals tab listing pending withdrawal requests with user mobile, UPI ID, amount, and Approve/Reject buttons; (3) Users tab listing all users with Block button. Use the authorization component's access control to guard this page. Display unauthorized message for non-admin users."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminTaskApprovals.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch pending task submissions for admin review from backend. Cache with queryKey ['adminTaskApprovals']."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminWithdrawalApprovals.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch pending withdrawal requests for admin review from backend. Cache with queryKey ['adminWithdrawalApprovals']."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminUsers.ts",
+          "operation": "create",
+          "description": "Create React Query hook to fetch all users list for admin from backend. Cache with queryKey ['adminUsers']."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminApproveTask.ts",
+          "operation": "create",
+          "description": "Create mutation hook for admin to approve task submission, accepting submissionId. Invalidate ['adminTaskApprovals'] query on success."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminRejectTask.ts",
+          "operation": "create",
+          "description": "Create mutation hook for admin to reject task submission, accepting submissionId. Invalidate ['adminTaskApprovals'] query on success."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminApproveWithdrawal.ts",
+          "operation": "create",
+          "description": "Create mutation hook for admin to approve withdrawal request, accepting requestId. Invalidate ['adminWithdrawalApprovals'] query on success."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminRejectWithdrawal.ts",
+          "operation": "create",
+          "description": "Create mutation hook for admin to reject withdrawal request, accepting requestId. Invalidate ['adminWithdrawalApprovals'] query on success."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminBlockUser.ts",
+          "operation": "create",
+          "description": "Create mutation hook for admin to block user, accepting userId. Invalidate ['adminUsers'] query on success."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for AdminPanelPage at /admin, guarded to show only for authenticated admin users."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Build static information pages for Terms, Disclaimer, Rules, and Support",
+      "acceptanceCriteria": [
+        "Each page renders its full content as specified",
+        "Support page links open correctly (mailto, Telegram, WhatsApp)",
+        "Pages are accessible from the app navigation or footer"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/TermsPage.tsx",
+          "operation": "create",
+          "description": "Create Terms & Conditions page displaying the 5 stated rules from BuildRequest in a readable card-based layout with emerald green theme."
+        },
+        {
+          "path": "frontend/src/pages/DisclaimerPage.tsx",
+          "operation": "create",
+          "description": "Create Disclaimer page displaying the 3 stated points from BuildRequest in a readable card-based layout with emerald green theme."
+        },
+        {
+          "path": "frontend/src/pages/RulesPage.tsx",
+          "operation": "create",
+          "description": "Create Important Rules page displaying the 6 stated rules from BuildRequest in a readable card-based layout with emerald green theme."
+        },
+        {
+          "path": "frontend/src/pages/SupportPage.tsx",
+          "operation": "create",
+          "description": "Create Support page displaying Support Email: s10361781@gmail.com (mailto link), Telegram Support: https://t.me/supergroearn (external link), WhatsApp Support: +91-63710-78941 (wa.me link). Use emerald green and gold theme with clear call-to-action buttons for each support channel."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add routes for TermsPage at /terms, DisclaimerPage at /disclaimer, RulesPage at /rules, and SupportPage at /support."
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "create",
+          "description": "Create Footer component with navigation links to Terms, Disclaimer, Rules, and Support pages. Use emerald green background with gold text for links. Include in main App layout."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire Footer component into the main app layout so it appears on all pages."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Apply cohesive visual theme with emerald green and gold color palette",
+      "acceptanceCriteria": [
+        "All pages share the same color palette and typography",
+        "Wallet balance and reward amounts are visually prominent",
+        "Layout is readable on mobile screen widths (320px–430px)",
+        "Navigation is consistent across all pages"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Apply deep emerald green (#047857, #065f46) and gold (#f59e0b, #d97706) color palette as CSS custom properties. Set professional sans-serif typeface (Inter or similar). Configure subtle gradient backgrounds. Ensure mobile-first responsive design for widths 320px-430px. Make rupee amounts bold and prominent in gold. Add consistent card shadow and border-radius styles."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme with custom emerald and gold color values for primary, secondary, and accent colors. Configure font family for clean sans-serif. Add custom utilities for gradient backgrounds and card styles."
+        },
+        {
+          "path": "frontend/src/components/Navigation.tsx",
+          "operation": "create",
+          "description": "Create Navigation component with consistent mobile-optimized menu showing links to Home, Daily Tasks, Referral, Wallet, Admin (if admin), and account menu with logout. Use emerald green header bar with gold accent. Display generated app logo from frontend/public/assets/generated/super-gro-logo.dim_256x256.png. Include in main App layout."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire Navigation component into the main app layout so it appears on all authenticated pages. Ensure consistent layout structure across all routes."
+        }
+      ]
+    }
+  ]
+}

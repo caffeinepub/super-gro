@@ -1,0 +1,170 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T07:40:40.951Z",
+  "summary": "The diff implements a frontend-heavy application with routing, visual theme, and several UI pages. However, the backend (main.mo) is a generic task/author/reward platform that does not implement the specific Super Gro requirements (mobile OTP auth, daily task types with specific rewards, referral tree with 10 levels, wallet/withdrawal backend, admin panel backend). The frontend pages have significant gaps: wallet and referral pages use hardcoded mock data instead of live backend calls, the admin panel lacks a withdrawal approvals tab and users tab, and several backend-specific functions are not wired up.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Implement user registration and login backend with mobile number, hashed OTP, referral code, referrer ID, registration timestamp, account status. Expose requestOTP, verifyOTP, registerUser, getMyProfile.",
+      "reason": "The backend defines a generic UserProfile with name/mobile/referralCode but has no OTP generation, OTP hashing, time-limited OTP storage, verifyOTP returning a session token, registerUser linking referrer, or duplicate mobile rejection logic. LoginPage.tsx uses Internet Identity as the primary auth mechanism instead of mobile OTP.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/pages/LoginPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Daily tasks backend with task types CHECKIN=50, WATCH_VIDEO=100, SCREENSHOT=50, REFER_FRIEND=1000, WEEKLY_BONUS=1000, per-day enforcement, 7-day streak for WEEKLY_BONUS, admin approve/reject crediting wallet.",
+      "reason": "The backend defines generic task types (#simpleResearch, #complexResearch, etc.) with no mapping to required Super Gro task types. There is no per-day submission enforcement, no 7-consecutive-day streak logic, and no wallet crediting on approval.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/pages/DailyTasksPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "10-level referral/team bonus backend with specific level bonuses, direct referral bonus, claimLevelBonus, getMyReferralStats returning directCount/teamSize/levelReached/directIncome/teamIncome.",
+      "reason": "The backend has no referral tree, no level bonus logic, no claimLevelBonus function, and no getMyReferralStats function. ReferralPage.tsx uses hardcoded zeros with no backend calls.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/pages/ReferralPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Wallet and withdrawal backend: track availableBalance/totalEarnings/totalWithdrawn, submitWithdrawal, adminApproveWithdrawal, adminRejectWithdrawal, minimum 500 enforcement server-side.",
+      "reason": "The backend has no wallet tracking, no withdrawal request storage, and no withdrawal functions. WalletPage.tsx uses MOCK_WALLET with hardcoded zeros and a local state array for withdrawals instead of calling a backend.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/pages/WalletPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Admin panel backend: listPendingTaskSubmissions, approveTask, rejectTask, listPendingWithdrawals, approveWithdrawal, rejectWithdrawal, blockUser, listAllUsers. Admin identity hardcoded as deployer principal.",
+      "reason": "The backend has approveTaskSubmission and cancelTaskSubmission but lacks listPendingWithdrawals, approveWithdrawal, rejectWithdrawal, blockUser, and listAllUsers. There is no deployer-principal-based admin hardcoding visible.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/pages/AdminPanelPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Home dashboard Wallet Balance card displaying live data from getWallet(), Direct Income and Team Income from getMyReferralStats().",
+      "reason": "HomePage.tsx displays hardcoded 0.00 for wallet balance and 0 for Direct/Team Income with no backend calls to getWallet() or getMyReferralStats().",
+      "evidence": [
+        "frontend/src/pages/HomePage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "requirement": "Referral page: live data for directCount, teamSize, levelReached, directIncome, teamIncome from getMyReferralStats(); Claim button for eligible levels calling claimLevelBonus.",
+      "reason": "ReferralPage.tsx hardcodes all referral stats to 0 and the level table has no active Claim button wired to a backend claimLevelBonus call.",
+      "evidence": [
+        "frontend/src/pages/ReferralPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "requirement": "Wallet page: live balance data from getWallet(), past withdrawal requests from backend, submitWithdrawal backend call.",
+      "reason": "WalletPage.tsx uses MOCK_WALLET with hardcoded zeros and stores withdrawal requests in local state only, never calling any backend wallet or withdrawal functions.",
+      "evidence": [
+        "frontend/src/pages/WalletPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "requirement": "Admin Panel: Withdrawal Approvals tab with pending withdrawals (user mobile, UPI ID, amount, Approve/Reject), Users tab with all users and Block button.",
+      "reason": "AdminPanelPage.tsx only has a task submissions section with no Withdrawal Approvals tab and no Users tab. useQueries.ts has no withdrawal or user listing hooks for admin.",
+      "evidence": [
+        "frontend/src/pages/AdminPanelPage.tsx",
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity (ICP) authentication used as the primary login mechanism instead of mobile OTP",
+      "reason": "The build request specifies simulated mobile OTP login with any 6-digit code accepted. The implementation uses @dfinity/auth-client Internet Identity as the real authentication layer.",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/pages/LoginPage.tsx",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "Generic backend task types: #simpleResearch, #complexResearch, #survey, #transcription, #imageAnnotation, #appDownload",
+      "reason": "The build request specifies exactly five task types: CHECKIN, WATCH_VIDEO, SCREENSHOT, REFER_FRIEND, WEEKLY_BONUS. These generic types were not requested.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Invoice type with paymentLink field and payment processing state (paid/cancelled)",
+      "reason": "The build request explicitly states no external payment gateway integration. Invoice objects with paymentLink fields were not requested.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Author/workforce system with banned/verified author management and workforce/retraining reward percentages",
+      "reason": "The Author type with verified/banned states and task reward percentage splits were not part of the Super Gro specification.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Blob storage mixin included in backend actor",
+      "reason": "MixinStorage for blob/file storage was not requested in the build specification.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Secret token-based access control initialization via _initializeAccessControlWithSecret and caffeineAdminToken",
+      "reason": "The build request specifies admin role restricted to canister deployer principal only, not a secret token-based access control system.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/utils/urlParams.ts"
+      ]
+    },
+    {
+      "description": "Separate profile creation step requiring a display name during registration",
+      "reason": "The build request specifies registration fields as mobile number, OTP, and optional referral code only. A separate name entry profile step was not specified.",
+      "evidence": [
+        "frontend/src/pages/LoginPage.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.82,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Navigation.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/AdminPanelPage.tsx",
+    "frontend/src/pages/DailyTasksPage.tsx",
+    "frontend/src/pages/DisclaimerPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/LoginPage.tsx",
+    "frontend/src/pages/ReferralPage.tsx",
+    "frontend/src/pages/RulesPage.tsx",
+    "frontend/src/pages/SupportPage.tsx",
+    "frontend/src/pages/TermsPage.tsx",
+    "frontend/src/pages/WalletPage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}
